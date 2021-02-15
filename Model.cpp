@@ -197,3 +197,175 @@ bool Model::isVowel(char letter)
             return false;
     }
 }
+
+// Returns the English character for a Tutnese Syllable
+string Model::translateSyllable(string syllable)
+{
+    string originalString = syllable;
+    string translation = "";
+
+    syllable[0] = tolower(syllable.at(0));
+
+    if (isDoubled(syllable))
+    {
+        translation = convertSyllable(getTutneseStem(syllable));
+        translation = translation + translation;
+        translation = determineCapitalization(translation, originalString);
+        return translation;
+    }
+    else
+    {
+        translation = convertSyllable(syllable);
+        translation = determineCapitalization(translation, originalString);
+        return translation;
+    }
+}
+
+// Returns true if the Syllable contains "Squa" or "Squat", and false if not
+bool Model::isDoubled(string syllable)
+{
+     if ((syllable.find("squa") != string::npos) || ((syllable.find("squat") != string::npos) && (syllable.find("squatut") == string::npos)))
+     {
+         return true;
+      }
+     else
+     {
+        return false;
+    }
+}
+
+// Returns the stem of the Tutnese syllable for double characters
+string Model::getTutneseStem(string syllable)
+{
+    if ((syllable.substr(0, 5) == "squat") && (syllable.substr(0, 5) != "squatut"))
+    {
+        return syllable.substr(5, syllable.size() - 5);
+    }
+    else if (syllable.substr(0, 4) == "squa")
+    {
+        return syllable.substr(4, syllable.size() - 4);
+    }
+    else
+    {
+        return "!error";
+    }
+}
+
+string Model::determineCapitalization(string translation, string originalString)
+{
+    if (isupper(originalString.at(0)))
+    {
+        translation.at(0) = toupper(translation.at(0));
+        return translation;
+    }
+    else
+    {
+        return translation;
+    }
+}
+
+// Returns the English character based on the Tutnese syllable
+char Model::convertSyllable(string syllable)
+{
+    char conversion;
+
+    switch (syllable.at(0))
+    {
+        case 'b':
+            conversion = 'b';
+            break;
+
+        case 'c':
+            conversion = 'c';
+            break;
+
+        case 'd':
+            conversion = 'd';
+            break;
+
+        case 'f':
+            conversion = 'f';
+            break;
+
+        case 'g':
+            conversion = 'g';
+            break;
+
+        case 'h':
+            conversion = 'h';     
+            break;
+
+        case 'j':
+            conversion = 'j';
+            break;
+
+        case 'k':
+            conversion = 'k';
+            break;
+
+        case 'l':
+            conversion = 'l';
+            break;
+
+        case 'm':
+            conversion = 'm';
+            break;
+
+        case 'n':
+            conversion = 'n';
+            break;
+
+        case 'p':
+            conversion = 'p';
+            break;
+
+        case 'q':
+            conversion = 'q';
+            break;
+
+        case 'r':
+            conversion = 'r';
+            break;
+
+        case 's':
+            conversion = 's';
+            break;
+
+        case 't':
+            conversion = 't';
+            break;
+
+        case 'v':
+            conversion = 'v';
+            break;
+
+        case 'w':
+            conversion = 'w';
+            break;
+
+        case 'e':
+            if ((syllable.size() > 1) && (tolower(syllable.at(1) == 'x')))
+            {
+                conversion = 'x';
+            }
+            else
+            {
+                conversion = 'e';
+            }
+            break;
+
+        case 'y':
+            conversion = 'y';
+            break;
+
+        case 'z':
+            conversion = 'z';
+            break;
+
+        default:
+            conversion = syllable.at(0);
+            break;
+    }
+
+    return conversion;
+}
