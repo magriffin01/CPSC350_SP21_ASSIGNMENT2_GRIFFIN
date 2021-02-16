@@ -17,16 +17,24 @@ using namespace std;
 class Translator
 {
     public:
+        // From Assignment 1
         Translator();
         ~Translator();
         string translateEnglishWord(string englishWord);
         string translateEnglishSentence(string englishSentence);
 
+        // From Assignment 2
+        string translateTutneseWord(string tutneseWord);
+        string translateTutneseSentence(string tutneseSentence);
+
     private:
+        // From Assignment 1
         bool isDoubleCharacter(int index, string word);
         bool hasNoMoreSpaces(int index);
         void updateWhitespaceIndices(int& indexOfPreviousWhitespace, int& indexOfNextWhitespace, string sentence);
         Model model;
+
+        // From Assignment 2
 
 };
 

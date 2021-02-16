@@ -24,6 +24,7 @@ class Model
 
         // From Assignment2
         string translateSyllable(string syllable);
+        int getTutneseSyllableLength();
 
     private:
         // From Assignment1
@@ -37,6 +38,7 @@ class Model
         char convertSyllable(string syllable);
         string getTutneseStem(string syllable);
         string determineCapitalization(string translation, string originalString);
+        int tutneseSyllableLength;
         
 };
 

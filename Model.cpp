@@ -201,6 +201,7 @@ bool Model::isVowel(char letter)
 // Returns the English character for a Tutnese Syllable
 string Model::translateSyllable(string syllable)
 {
+    tutneseSyllableLength = 0;
     string originalString = syllable;
     string translation = "";
 
@@ -224,12 +225,16 @@ string Model::translateSyllable(string syllable)
 // Returns true if the Syllable contains "Squa" or "Squat", and false if not
 bool Model::isDoubled(string syllable)
 {
-     if ((syllable.find("squa") != string::npos) || ((syllable.find("squat") != string::npos) && (syllable.find("squatut") == string::npos)))
-     {
-         return true;
-      }
-     else
-     {
+    if ((syllable.size() >= 5) && (syllable.substr(0, 5) == "squat"))
+    {
+        return true;
+    }
+    else if ((syllable.size() >= 4) && (syllable.substr(0, 4) == "squa"))
+    {
+        return true;
+    }
+    else
+    {
         return false;
     }
 }
@@ -237,12 +242,14 @@ bool Model::isDoubled(string syllable)
 // Returns the stem of the Tutnese syllable for double characters
 string Model::getTutneseStem(string syllable)
 {
-    if ((syllable.substr(0, 5) == "squat") && (syllable.substr(0, 5) != "squatut"))
+    if ((syllable.substr(0, 5) == "squat") && (syllable.substr(0, 7) != "squatut"))
     {
+        tutneseSyllableLength += 5;
         return syllable.substr(5, syllable.size() - 5);
     }
     else if (syllable.substr(0, 4) == "squa")
     {
+        tutneseSyllableLength += 4;
         return syllable.substr(4, syllable.size() - 4);
     }
     else
@@ -251,6 +258,7 @@ string Model::getTutneseStem(string syllable)
     }
 }
 
+// Determines the capitallization of a translation based on the first character of a string
 string Model::determineCapitalization(string translation, string originalString)
 {
     if (isupper(originalString.at(0)))
@@ -264,6 +272,12 @@ string Model::determineCapitalization(string translation, string originalString)
     }
 }
 
+// Returns the length of syllable
+int Model::getTutneseSyllableLength()
+{
+    return tutneseSyllableLength;
+}
+
 // Returns the English character based on the Tutnese syllable
 char Model::convertSyllable(string syllable)
 {
@@ -273,97 +287,120 @@ char Model::convertSyllable(string syllable)
     {
         case 'b':
             conversion = 'b';
+            tutneseSyllableLength += 3;
             break;
 
         case 'c':
             conversion = 'c';
+            tutneseSyllableLength += 4;
             break;
 
         case 'd':
             conversion = 'd';
+            tutneseSyllableLength += 3;
             break;
 
         case 'f':
             conversion = 'f';
+            tutneseSyllableLength += 3;
             break;
 
         case 'g':
             conversion = 'g';
+            tutneseSyllableLength += 3;
             break;
 
         case 'h':
-            conversion = 'h';     
+            conversion = 'h';
+            tutneseSyllableLength += 4;
             break;
 
         case 'j':
             conversion = 'j';
+            tutneseSyllableLength += 3;
             break;
 
         case 'k':
             conversion = 'k';
+            tutneseSyllableLength += 4;
             break;
 
         case 'l':
             conversion = 'l';
+            tutneseSyllableLength += 3;
             break;
 
         case 'm':
             conversion = 'm';
+            tutneseSyllableLength += 3;
             break;
 
         case 'n':
             conversion = 'n';
+            tutneseSyllableLength += 3;
             break;
 
         case 'p':
             conversion = 'p';
+            tutneseSyllableLength += 3;
             break;
 
         case 'q':
             conversion = 'q';
+            tutneseSyllableLength += 5;
             break;
 
         case 'r':
             conversion = 'r';
+            tutneseSyllableLength += 3;
             break;
 
         case 's':
             conversion = 's';
+            tutneseSyllableLength += 3;
             break;
 
         case 't':
             conversion = 't';
+            tutneseSyllableLength += 3;
             break;
 
         case 'v':
             conversion = 'v';
+            tutneseSyllableLength += 3;
             break;
 
         case 'w':
             conversion = 'w';
+            tutneseSyllableLength += 4;
             break;
 
         case 'e':
             if ((syllable.size() > 1) && (tolower(syllable.at(1) == 'x')))
             {
                 conversion = 'x';
+                tutneseSyllableLength += 2;
             }
             else
             {
                 conversion = 'e';
+                tutneseSyllableLength += 1;
             }
             break;
 
         case 'y':
             conversion = 'y';
+            tutneseSyllableLength += 3;
             break;
 
         case 'z':
             conversion = 'z';
+            tutneseSyllableLength += 3;
             break;
 
         default:
             conversion = syllable.at(0);
+            tutneseSyllableLength += 1;
             break;
     }
 

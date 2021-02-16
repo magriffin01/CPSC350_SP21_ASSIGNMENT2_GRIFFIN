@@ -6,6 +6,9 @@
 # Assignment: Assignment 2
 */
 
+// DELETE AFTER
+#include <iostream>
+
 #include <string>
 #include "Translator.h"
 
@@ -120,5 +123,31 @@ bool Translator::isDoubleCharacter(int index, string word)
     {
         return false;
     }
+}
+
+// Take in a Tutnese word and translate it into English
+string Translator::translateTutneseWord(string tutneseWord)
+{
+    string translatedCharacter;
+    string translatedWord;
+
+    for (int i = 0; i < tutneseWord.size(); ++i)
+    {
+        translatedCharacter = model.translateSyllable(tutneseWord.substr(i, tutneseWord.size() - i));
+        i = i + model.getTutneseSyllableLength() - 1;
+        translatedWord = translatedWord + translatedCharacter;
+        // DELETE AFTER
+        cout << translatedWord << endl;
+    }
+
+    return translatedWord;
+}
+
+// Take in a Tutnese sentence and returns it in English
+string Translator::translateTutneseSentence(string tutneseSentence)
+{
+    string translatedSentence;
+    translatedSentence = translateTutneseWord(tutneseSentence) + "\n"; // Add newline at the end for the file
+    return translatedSentence;
 }
 
