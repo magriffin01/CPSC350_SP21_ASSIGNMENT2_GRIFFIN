@@ -38,7 +38,7 @@ class Model
         char convertSyllable(string syllable);
         string getTutneseStem(string syllable);
         string determineCapitalization(string translation, string originalString);
-        int tutneseSyllableLength;
+        int tutneseSyllableLength; // Used to keep track of indices when translating entire tutnese words
         
 };
 

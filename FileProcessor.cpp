@@ -35,6 +35,17 @@ void FileProcessor::processFile(string inputFile, string outputFile)
     closeOutputFile(outputFile);
 }
 
+// Takes a sring for the input file and output file, reads the tutnese file, and writes the translation to the output file
+void FileProcessor::processTutneseFile(string inputFile, string outputFile)
+{
+    openInputFile(inputFile);
+    readInputFile();
+    closeInputFile(inputFile);
+    openOutputFile(outputFile);
+    writeEnglishOutputfile();
+    closeOutputFile(outputFile);
+}
+
 // Reads the input file and puts the english text into a string
 void FileProcessor::readInputFile()
 {
@@ -60,6 +71,13 @@ void FileProcessor::readInputFile()
 void FileProcessor::writeOutputFile()
 {
     tutneseText = translator.translateEnglishSentence(englishText);
+    outputStream << tutneseText << flush;
+}
+
+// Writes to English output file from the tutneseText string
+void FileProcessor::writeEnglishOutputfile()
+{
+    tutneseText = translator.translateTutneseSentence(englishText);
     outputStream << tutneseText << flush;
 }
 
@@ -112,3 +130,4 @@ void FileProcessor::closeOutputFile(string outputFile)
 
     outputStream.close();
 }
+

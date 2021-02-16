@@ -201,12 +201,15 @@ bool Model::isVowel(char letter)
 // Returns the English character for a Tutnese Syllable
 string Model::translateSyllable(string syllable)
 {
+    // Set syllable length to 0, store original word preserving capitalization to determine later, initialize translation
     tutneseSyllableLength = 0;
     string originalString = syllable;
     string translation = "";
 
+    // Lower the first letter incase it is capital for all lowercase
     syllable[0] = tolower(syllable.at(0));
 
+    // Check if the syllable is doubled, and then convert, capitalize if needed and return
     if (isDoubled(syllable))
     {
         translation = convertSyllable(getTutneseStem(syllable));
@@ -244,13 +247,13 @@ string Model::getTutneseStem(string syllable)
 {
     if ((syllable.substr(0, 5) == "squat") && (syllable.substr(0, 7) != "squatut"))
     {
-        tutneseSyllableLength += 5;
-        return syllable.substr(5, syllable.size() - 5);
+        tutneseSyllableLength += 5; // Increases the syllable length to appropriate value
+        return syllable.substr(5, syllable.size() - 5); // Returns the substring without "squat"
     }
     else if (syllable.substr(0, 4) == "squa")
     {
-        tutneseSyllableLength += 4;
-        return syllable.substr(4, syllable.size() - 4);
+        tutneseSyllableLength += 4; // Increases the syllable length to appropriate value
+        return syllable.substr(4, syllable.size() - 4); // Returns the substring without "squa"
     }
     else
     {
@@ -278,7 +281,7 @@ int Model::getTutneseSyllableLength()
     return tutneseSyllableLength;
 }
 
-// Returns the English character based on the Tutnese syllable
+// Returns the English character based on the Tutnese syllable and increases tutneseSyllableLength by the number of characters in each syllable
 char Model::convertSyllable(string syllable)
 {
     char conversion;

@@ -6,9 +6,6 @@
 # Assignment: Assignment 2
 */
 
-// DELETE AFTER
-#include <iostream>
-
 #include <string>
 #include "Translator.h"
 
@@ -131,13 +128,12 @@ string Translator::translateTutneseWord(string tutneseWord)
     string translatedCharacter;
     string translatedWord;
 
+    // Cycle through the characters of the string, shrinking the string each time
     for (int i = 0; i < tutneseWord.size(); ++i)
     {
-        translatedCharacter = model.translateSyllable(tutneseWord.substr(i, tutneseWord.size() - i));
-        i = i + model.getTutneseSyllableLength() - 1;
-        translatedWord = translatedWord + translatedCharacter;
-        // DELETE AFTER
-        cout << translatedWord << endl;
+        translatedCharacter = model.translateSyllable(tutneseWord.substr(i, tutneseWord.size() - i)); // Get's the substring of the word after each syllable has been taken care of
+        i = i + model.getTutneseSyllableLength() - 1; // Increases i by the amount of characters the last syllable was, and subtract 1 because i refers to an index
+        translatedWord = translatedWord + translatedCharacter; // Add the character to the word
     }
 
     return translatedWord;
@@ -147,7 +143,7 @@ string Translator::translateTutneseWord(string tutneseWord)
 string Translator::translateTutneseSentence(string tutneseSentence)
 {
     string translatedSentence;
-    translatedSentence = translateTutneseWord(tutneseSentence) + "\n"; // Add newline at the end for the file
+    translatedSentence = translateTutneseWord(tutneseSentence);
     return translatedSentence;
 }
 

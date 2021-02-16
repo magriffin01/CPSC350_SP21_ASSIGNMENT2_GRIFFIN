@@ -19,11 +19,16 @@ using namespace std;
 class FileProcessor
 {
     public:
+        // From Assignment 1
         FileProcessor();
         ~FileProcessor();
         void processFile(string inputFile, string outputFile);
+
+        // From Assignment 2
+        void processTutneseFile(string inputFile, string outputFile);
         
     private:
+        // From Assignment 1
         void openInputFile(string inputFile);
         void readInputFile();
         void closeInputFile(string inputFile);
@@ -35,6 +40,9 @@ class FileProcessor
         ofstream outputStream;
         string englishText;
         string tutneseText;
+
+        // From Assignment 2
+        void writeEnglishOutputfile();
 };
 
 #endif

@@ -34,8 +34,6 @@ class Translator
         void updateWhitespaceIndices(int& indexOfPreviousWhitespace, int& indexOfNextWhitespace, string sentence);
         Model model;
 
-        // From Assignment 2
-
 };
 
 #endif

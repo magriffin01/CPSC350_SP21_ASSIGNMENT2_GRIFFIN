@@ -7,21 +7,29 @@
 */
 
 #include <iostream>
-// #include "FileProcessor.h"
-#include "Translator.h"
+#include <string>
+#include "FileProcessor.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-    // FileProcessor fileProcessor;
-    // fileProcessor.processFile(argv[1], argv[2]);
+    FileProcessor fileProcessor;
+    string conversionType = argv[3];
 
-    Translator translator;
+    if (conversionType == "E2T")
+    {
+        fileProcessor.processFile(argv[1], argv[2]);
+    }
+    else if (conversionType == "T2E")
+    {
+        fileProcessor.processTutneseFile(argv[1], argv[2]);
+    }
+    else
+    {
+        cout << "Invalid command line arguments" << endl;
+    }
     
-    cout << translator.translateTutneseWord(translator.translateEnglishWord("Crosssection")) << endl;
-    cout << translator.translateEnglishWord("Crosssection") << endl;
-    cout << translator.translateTutneseSentence("I tutsquatokuck a wackalulkuck tuto tuthashe pubarugkuck yubesustuterugdudayub");
 
     return 0;
 }
