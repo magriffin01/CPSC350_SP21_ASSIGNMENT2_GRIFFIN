@@ -1,7 +1,7 @@
 # CPSC350_SP21_ASSIGNMENT2_GRIFFIN
 
 1. IDENTIFYING INFORMATION
-2. 
+
 a. Full Name: Mark Griffin
 
 b. Student ID: 2340502
